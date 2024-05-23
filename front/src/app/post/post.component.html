@@ -1,42 +1,10 @@
-<div class="row">
-  <div class="col">
-    <label for="filter">Tags:</label>
-    <input type="text" class="form-control" placeholder="tags: tech,culture,startup" [(ngModel)]="filter.tags" />
-  </div>
-  <div class="col">
-    <label for="filter">Sort By:</label>
-    <select class="form-select" [(ngModel)]="filter.sortBy">
-      @for (sort of sortColumns; track sort) {
-      <option value="{{ sort }}">{{ sort }}</option>
-      }
-    </select>
-  </div>
+<app-post-header [filter]="filter" (filterChange)="handleFilterChange($event)" />
 
-  <div class="col">
-    <label for="filter">Direction:</label>
-    <select class="form-select" [(ngModel)]="filter.direction">
-      @for (sort of sortDirections; track sort) {
-      <option value="{{ sort }}">{{ sort }}</option>
-      }
-    </select>
-  </div>
-</div>
-
-<button [disabled]="filter.tags === ''" class="btn btn-primary" style="margin: 20px 0" type="button"
-  (click)="getPost()">
-  Get Posts
-</button>
-
-<div *ngIf="posts.length > 0">
-  <div>
-    <div>total: {{ posts.length }}</div>
-  </div>
-</div>
 <div class="posts">
   <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">#</th>
+        <th scope="col"># {{ posts.length }}</th>
         <th scope="col">Author</th>
         <th scope="col" style="cursor: pointer" (click)="sortBy('likes')">
           Likes

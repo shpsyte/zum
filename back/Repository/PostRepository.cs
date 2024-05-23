@@ -15,10 +15,11 @@ public class PostRepository : IPostRepository
     {
         var posts = new List<Post>();
 
-        var tags = filter.tags.Split(',').ToList();
-        using (HttpClient client = new HttpClient())
+        var tags = filter.tags.Split(',').Select(a => a.Trim()).GroupBy(a => a).Select(a => a.Key).ToList();
+
+        foreach (var tag in tags)
         {
-            foreach (var tag in tags)
+            using (HttpClient client = new HttpClient())
             {
                 var url = string.Format(hatchApi, tag);
                 var response = await client.GetFromJsonAsync<Root>(url);
