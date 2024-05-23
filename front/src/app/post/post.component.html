@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col">
+    <label for="filter">Tags:</label>
+    <input type="text" class="form-control" placeholder="tags: tech,culture,startup" [(ngModel)]="filter.tags" />
+  </div>
+  <div class="col">
+    <label for="filter">Sort By:</label>
+    <select class="form-select" [(ngModel)]="filter.sortBy">
+      @for (sort of sortColumns; track sort) {
+      <option value="{{ sort }}">{{ sort }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="col">
+    <label for="filter">Direction:</label>
+    <select class="form-select" [(ngModel)]="filter.direction">
+      @for (sort of sortDirections; track sort) {
+      <option value="{{ sort }}">{{ sort }}</option>
+      }
+    </select>
+  </div>
+</div>
+
+<button [disabled]="filter.tags === ''" class="btn btn-primary" style="margin: 20px 0" type="button"
+  (click)="getPost()">
+  Get Posts
+</button>
+
+<div *ngIf="posts.length > 0">
+  <div>
+    <div>total: {{ posts.length }}</div>
+  </div>
+</div>
+<div class="posts">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Author</th>
+        <th scope="col" style="cursor: pointer" (click)="sortBy('likes')">
+          Likes
+          <span *ngIf="filter.sortBy === 'likes'">
+            {{ filter.direction === "asc" ? "⬆️" : "⬇️" }}
+          </span>
+        </th>
+        <th scope="col" style="cursor: pointer" (click)="sortBy('popularity')">
+          Popularity
+          <span *ngIf="filter.sortBy === 'popularity'">
+            {{ filter.direction === "asc" ? "⬆️" : "⬇️" }}
+          </span>
+        </th>
+        <th scope="col" style="cursor: pointer" (click)="sortBy('reads')">
+          Reads
+
+          <span *ngIf="filter.sortBy === 'reads'">
+            {{ filter.direction === "asc" ? "⬆️" : "⬇️" }}
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (post of posts; track post.id) {
+      <tr>
+        <th scope="row">{{ post.id }}</th>
+        <td>
+          {{ post.author }}
+        </td>
+        <td>{{ post.likes }}</td>
+        <td>{{ post.popularity }}</td>
+        <td>{{ post.reads }}</td>
+      </tr>
+      } @empty {
+      <tr *ngIf="loading" class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </tr>
+      <tr *ngIf="!loading">
+        <td colspan="5">No posts found</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
