@@ -1,6 +1,9 @@
 <app-post-header [filter]="filter" (filterChange)="handleFilterChange($event)" />
 
 <div class="posts">
+  <span *ngIf="error" class="text-danger" role="status">
+    {{ error }}
+  </span>
   <table class="table table-striped">
     <thead>
       <tr>

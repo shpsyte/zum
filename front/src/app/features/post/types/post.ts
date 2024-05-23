@@ -7,9 +7,3 @@ export interface Post {
   reads: number;
   tags: string[];
 }
-
-export interface PostFilter {
-  tags: string;
-  sortBy: string;
-  direction: string;
-}
