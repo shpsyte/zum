@@ -30,7 +30,6 @@ export class PostComponent {
 
   getPost(filter: PostFilter) {
     if (this.filter.tags) {
-      this.posts = [];
       this.loading = true;
       this.error = '';
       this.service
