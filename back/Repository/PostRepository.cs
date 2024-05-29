@@ -32,7 +32,7 @@ public class PostRepository : IPostRepository
 
 
         // remove duplicates
-        posts = posts.GroupBy(a => a.Id).SelectMany(a => a.ToList()).ToList();
+        posts = posts.GroupBy(a => a.Id).Select(a => a.First()).ToList();
 
         var column = filter.sortBy ?? "id";
         var direction = filter.direction ?? "asc";

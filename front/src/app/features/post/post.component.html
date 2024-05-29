@@ -7,7 +7,12 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col"># {{ posts.length }}</th>
+        <th scope="col" style="cursor: pointer" (click)="sortBy('id')">
+          # {{ posts.length }}
+          <span *ngIf="filter.sortBy === 'id'">
+            {{ filter.direction === "asc" ? "⬆️" : "⬇️" }}
+          </span>
+        </th>
         <th scope="col">Author</th>
         <th scope="col" style="cursor: pointer" (click)="sortBy('likes')">
           Likes
