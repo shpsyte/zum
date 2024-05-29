@@ -1,5 +1,9 @@
 bin/
 node_modules/
+obj/
+.angular/
+# remove obj folder inside of the back folder from git
+obj/
 
 
 

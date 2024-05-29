@@ -1,6 +1,3 @@
-
-
-
 public class PostService : IPostService
 {
     private IPostRepository _postRepository;
@@ -11,6 +8,8 @@ public class PostService : IPostService
 
     async public Task<IEnumerable<Post>> Get(PostFilter filter)
     {
-        return await _postRepository.Get(filter);
+        var data = await _postRepository.Get(filter);
+        return data;
+
     }
 }

@@ -30,6 +30,7 @@ public class PostRepository : IPostRepository
             }
         }
 
+
         // remove duplicates
         posts = posts.GroupBy(a => a.Id).SelectMany(a => a.ToList()).ToList();
 
